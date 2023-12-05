@@ -23,32 +23,36 @@ $(function () {
     }
   });
 
-  // Add a listener for click events on the clear button
-  $(".clearBtn").on("click", function () {
-    // Get the parent time-block and clear the associated textarea
-    $(this).siblings(".description").val("");
-    // Clear the stored input from local storage
-    var timeBlockId = $(this).parent().attr("id");
-    localStorage.removeItem(timeBlockId);
+  // Apply the past, present, or future class to each time block
+  $(".time-block").each(function () {
+    // Get the hour from the time-block id
+    var hour = parseInt($(this).attr("id").split("-")[1]);
+
+    // Get the current hour in 24-hour format using Day.js
+    var currentHour = dayjs().format("H");
+
+    // Compare the time-block hour with the current hour and apply classes accordingly
+    if (hour < currentHour) {
+      $(this).addClass("past");
+    } else if (hour == currentHour) {
+      $(this).addClass("present");
+    } else {
+      $(this).addClass("future");
+    }
+
+    // Get user input from local storage and set the textarea value
+    var storedInput = localStorage.getItem($(this).attr("id"));
+    if (storedInput) {
+      $(this).find(".description").val(storedInput);
+    }
   });
-
-
-
-
-
-
-
-
-
-  // TODO: Add code to apply the past, present, or future class to each time
-  // block by comparing the id to the current hour. HINTS: How can the id
-  // attribute of each time-block be used to conditionally add or remove the
-  // past, present, and future classes? How can Day.js be used to get the
-  // current hour in 24-hour time?
-  //
-  // TODO: Add code to get any user input that was saved in localStorage and set
-  // the values of the corresponding textarea elements. HINT: How can the id
-  // attribute of each time-block be used to do this?
-  //
-  // TODO: Add code to display the current date in the header of the page.
 });
+
+
+
+
+
+
+
+
+
