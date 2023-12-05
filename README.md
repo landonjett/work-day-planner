@@ -7,7 +7,7 @@ I have created a calendar for your work day! By creating this calendar i learned
 
 ## Usage
 
-to use the planner, click this website here: 
+to use the planner, click this website here: https://landonjett.github.io/work-day-planner/
 
 the planner is customizable to where you can edit the info for each hour and save your changes to your local machine by clicking the 'save' icon. 
 
